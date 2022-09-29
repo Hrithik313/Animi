@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block username %}
+    {{ username }}
+{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+
+        {% set counter = namespace(value=0) %}
+        <form action="/info" method="get">
+        {% for anime in animes %}
+            {% if anime.images.jpg.large_image_url != "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png" %}
+                {% if counter.value == 0 %}
+                    <div class="row rows">
+
+                        <div class="col-lg">
+                            <div class="frame">
+                                
+                                <button type="submit" name="anime" value="{{ anime.mal_id }}"><img class="pics" src='{{ anime.images.jpg.large_image_url }}' alt="anime pic" ></button>
+                                
+                            </div>
+                            <div class="container">
+                                <p class="result-name">{{ anime.title }}</p>
+                            </div>
+                        </div>
+
+                {% elif counter.value % 3 == 0 %}
+                    </div>
+                    <div class="row rows">
+                        <div class="col-lg">
+                            <div class="frame">
+                                <button type="submit" name="anime" value="{{ anime.mal_id }}"><img class="pics" src='{{ anime.images.jpg.large_image_url }}' alt="anime pic"></button>
+                            </div>
+                            <div class="container">
+                                <p class="result-name">{{ anime.title }}</p>
+                            </div>
+                        </div>
+
+                {% elif counter.value == limit %}
+                    </div>
+
+                {% else %}
+                    <div class="col-lg">
+                        <div class="frame">
+                            <button type="submit" name="anime" value="{{ anime.mal_id }}"><img class="pics" src='{{ anime.images.jpg.large_image_url }}' alt="anime pic" ></button>
+                        </div>
+                        <div class="container">
+                            <p class="result-name">{{ anime.title }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% set counter.value = counter.value + 1 %}
+            {% endif %}
+        {% endfor %}
+    </form>
+
+    </div>
+{% endblock %}

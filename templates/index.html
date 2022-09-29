@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block username %}
+    {{ username }}
+{% endblock %}
+
+{% block main %}
+    <!-- Slideshow container -->
+    <div class="slideshow-container" style="margin-top: -10px;">
+
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+            <img class="slides" src="https://wallpaperaccess.com/full/1184927.png" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img class="slides" src="https://wallpaperaccess.com/full/1099445.png" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img class="slides" src="https://wallpaperaccess.com/full/296821.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img class="slides" src="https://wallpaperaccess.com/full/1078973.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img class="slides" src="https://wallpaperaccess.com/full/229851.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img class="slides" src="https://wallpaperaccess.com/full/299609.jpg" style="width:100%">
+        </div>
+    </div>
+    <br>
+
+    <!-- The dots/circles -->
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    
+    <section>
+        <div style="text-align: left; margin: 100px 0px 0px 50px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+            <h2>Top Animes</h2>
+        </div>
+
+        <ul class="horizontal-media-scroller" tabindex="-1" style="margin-top: 50px;">
+            
+            <form action="/info" method="get" class="horizontal-media-scroller">
+
+            {% for anime in animes %}
+            <li style="margin: 10px 15px; ">
+                <button class="top-animes-button" type="submit" name="anime" value="{{ anime.mal_id }}">
+                    <figure>
+                        <picture>
+                            <img alt="{{ anime.title }} img" loading="lazy" src="{{ anime.images.jpg.large_image_url }}" class="top-animes-img">
+                        </picture>
+                        <figcaption>{{ anime.title }}</figcaption>      
+                    </figure>
+                </button>
+            </li>
+            {% endfor %}
+
+            </form>
+
+        </ul>
+    </section>
+
+{% endblock %}

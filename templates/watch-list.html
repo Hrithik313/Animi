@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Watch List
+{% endblock %}
+
+{% block username %}
+    {{ username }}
+{% endblock %}
+
+{% block header %}
+    <h1 class="head">Watch list</h1>
+{% endblock %}
+
+{% block main %}
+    <div class="container text-center" style="background-color: #212529;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Anime</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <form action="/info" method="get">
+                    {% for anime in animes %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td><button type="submit" name="anime" value="{{ anime.mal_id }}" style="color: white; letter-spacing: 2px;">{{ anime.title }}</button></td>
+                            <td>{{ anime.score }}</td>
+                        </tr>
+                    {% endfor %}
+                </form>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

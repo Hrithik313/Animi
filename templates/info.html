@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block username %}
+    {{ username }}
+{% endblock %}
+
+{% block main %}
+
+    <div class="content">
+        <div>
+            <img src="{{ anime.images.jpg.image_url }}" class="thumbnail">
+        </div>
+        <div>
+            <div >
+                <p class="info-title">{{ anime.title }}</p>
+            </div>
+        </div>
+
+        <div class="watch">
+            <a href="{{ link }}" target="_blank"><p class="watch-p">Watch Now</p></a>
+        </div>
+        
+            <div class="watch">
+                <form action="/watch-list" method="POST">
+                    {% if inList == False %}
+                        <button type="submit" name="add-anime" value="{{ anime.mal_id }}"><p class="watch-p" style="margin: auto;">Add to watch list</p></button>
+                    {% else %}
+                        <button type="submit" name="remove-anime" value="{{ anime.mal_id }}"><p class="watch-p" style="margin: auto;">Remove from watch list</p></button>
+                    {% endif %}
+                </form>
+            </div>
+        
+        <div class="info">
+            <div style="margin: 30px; margin: 30px; padding: 10px 0px;">
+                <div class="info-all">
+                    <h1 class="info-head">Info</h1>
+
+                    <div class="info-text">
+                        {% if trailer == True %}
+                            <p>Trailer: <a href="{{ anime.trailer.url }}" target="_blank">Click</a></p>
+                        {% endif %}
+
+                        <p>Type: {{ anime.type }}</p>
+                        <p>Genre: {{ anime.genres[0].name }}</p>
+                        <p>Rating: {{ anime.rating }}</p>
+                        <p>Episodes: {{ anime.episodes }}</p>
+                        <p>Duration: {{ anime.duration }}</p>
+                        <p>Status: {{ anime.status }}</p>
+                        <p>Score: {{ anime.score }}</p>
+                        <p>Rank: {{ anime.rank }}</p>
+                        <p>Popularity: {{ anime.popularity }}</p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sypnosis">
+            <div class="sypnosis-text">
+                <p>Synopsis:</p>
+                <p>{{ anime.synopsis }}</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
